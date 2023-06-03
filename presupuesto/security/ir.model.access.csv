@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-acceso_presupuesto_sale_order_acesor,acceso presupuesto acesor,model_sale_order_acesor,,1,1,1,1
-acceso_presupuesto_sale_order_acesor_dos,acceso presupuesto acesor dos,model_presupuesto_asesor,,1,1,1,1
-acceso_presupuesto_sale_order_garantia,acceso presupuesto garantias,model_sale_order_garantia,,1,1,1,1
