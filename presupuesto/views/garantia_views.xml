@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_campo_garantia_form" model="ir.ui.view">
+            <field name="name">Garantias</field>
+            <field name="model">sale.order.garantia</field>
+            <field name="arch" type="xml">
+                <form string="Garantia">
+                    <sheet>
+                        <group col="4">
+                            <field name="active"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_campo_garantia_list" model="ir.ui.view">
+            <field name="name">Garantias</field>
+            <field name="model">sale.order.garantia</field>
+            <field eval="6" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Garantia" editable="bottom" >
+                    <field name="active" widget="boolean_toggle"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="campo_garantia_view_search" model="ir.ui.view">
+            <field name="name">sale.order.garantia.search</field>
+            <field name="model">sale.order.garantia</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Garantia">
+                    <field name="name"/>
+                    <field name="active"/>
+                    <separator/>
+                    <filter string="Activos" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+<!--        DEFINICION DE MENU-->
+        <record id="action_campo_garantia" model="ir.actions.act_window">
+            <field name="name">Garantias</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.garantia</field>
+            <field name="search_view_id" ref="campo_garantia_view_search"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Crear nueva Garantia
+              </p>
+            </field>
+        </record>
+
+        <!--agregarlo en sale_order.xml-->
+        <menuitem name="Garantia"
+                  id="menu_campo_garantia"
+                  parent="sale.menu_sale_config"
+                  action="action_campo_garantia"
+                  sequence="6"/>
+    </data>
+</odoo>

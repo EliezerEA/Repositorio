@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_campo_asesor_form" model="ir.ui.view">
+            <field name="name">Asesor</field>
+            <field name="model">presupuesto.asesor</field>
+            <field name="arch" type="xml">
+                <form string="Asesor de ventas">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="telefono"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_campo_asesor_list" model="ir.ui.view">
+            <field name="name">Asesor</field>
+            <field name="model">presupuesto.asesor</field>
+            <field eval="6" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Asesor de ventas" editable="bottom" >
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="telefono"/>
+                    <field name="active" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="campo_asesor_view_search" model="ir.ui.view">
+            <field name="name">presupuesto.view.search</field>
+            <field name="model">presupuesto.asesor</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Asesores">
+                   <field name="name"/>
+                   <field name="email"/>
+                   <field name="telefono"/>
+                    <separator/>
+                    <filter string="Activos" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+<!--        DEFINICION DE MENU-->
+        <record id="action_campo_asesor" model="ir.actions.act_window">
+            <field name="name">Asesor de ventas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">presupuesto.asesor</field>
+            <field name="search_view_id" ref="campo_asesor_view_search"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Crear nuevo Asesor
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Asesor de ventas"
+                  id="presupuesto.asesor_menu"
+                  parent="contacts.res_partner_menu_config"
+                  action="action_campo_asesor"
+                  sequence="6"/>
+        
+    </data>
+</odoo>

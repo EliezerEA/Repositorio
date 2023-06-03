@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <data>
+        <record id="sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                 <field name="partner_id" position ="after">
+                    <field name="asesor_partner"/>
+                    <field name="asesor_partner_phone" attrs="{'invisible': [('asesor_partner', '=', False)]}" string="Telefono del Acesor"/>
+                    <field name="asesor_partner_email" attrs="{'invisible': [('asesor_partner', '=', False)]}" string="Email del Acesor"/>
+                 </field>
+                 <field name="payment_term_id" position ="after">
+                    <field name="forma_de_pago" />
+                    <field name="garantia" string="Garantia" options="{'no_open':True,'no_create': True}"/>
+                    <field name="delivery_date_presupuesto" />
+                 </field>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">                
+                    <field name="product_garantia" string="Garantia del Producto" options="{'no_open':True,'no_create': True}"/>
+<!--                    <field name="delivery_date_presupuesto" options="{'no_open':True,'no_create': True}"/>-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

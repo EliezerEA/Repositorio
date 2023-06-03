@@ -1,0 +1,253 @@
+<!-- Template para imprimir el presupuesto-->
+<odoo>
+    <template id="presupuesto.report_saleorder_document_od">
+        <t t-name="presupuesto.report_saleorder_document_od">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="col-6 float-left">
+                                        <img t-attf-src="data:image/png;base64,{{o.company_id.logo}}"
+                                             style="max-width:110px;" class="text-left"/>
+                                    </div>
+                                    <div class="col-6 float-right" style="text-align: right;">
+                                        <h3 style="font-size: 18px;">
+                                            <span t-field="o.company_id.name"/>
+                                        </h3>
+                                        <h3 style="font-size: 18px;">Nit:
+                                            <span t-field="o.company_id.vat"/>
+                                        </h3>
+                                        <h3 style="font-size: 18px;">Tel:
+                                            <span t-field="o.company_id.mobile"/>
+                                        </h3>
+                                        <h3 style="font-size: 18px;">
+                                            <span t-field="o.company_id.email"/>
+                                        </h3>
+                                        <h3 style="font-size: 18px;">Dirección:
+                                            <span t-field="o.company_id.street"/>
+                                            <span t-field="o.company_id.street2"/>
+                                            <span t-field="o.company_id.city"/>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4 border" style="border-top: 5px;"/>
+                    </div>
+                    <t t-call="web.external_layout">
+
+                        <style>
+                            .table th {
+                            font-size: 13px;
+                            }
+                            .table td {
+                            font-size: 12px;
+                            }
+                            .strong {
+                            font-size: 17px;
+                            }
+                            .span {
+                            font-size: 16px;
+                            }
+                            .title_row {
+                            font-size: 19px;
+                            font-weight: bold;
+                            }
+                            .table-body td {
+                            font-size: 16px;
+                            }
+                            .col-description {
+                            width: 80%;
+                            }
+                        </style>
+                        <div class="page">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div class="col-6 float-left">
+                                                <div class="">
+                                                    <p style="margin-bottom: 5px;">
+                                                        <strong>Cliente:</strong>
+                                                        <span t-field="o.partner_id.name"/>
+                                                    </p>
+                                                    <p t-if="o.partner_id.street" style="margin-bottom: 5px;">
+                                                        <strong>Dirección:</strong>
+                                                        <span t-field="o.partner_id.street"/>
+                                                        <span t-field="o.partner_id.street2"/>
+                                                        <span t-field="o.partner_id.city"/>
+                                                    </p>
+                                                    <p t-if="o.partner_id.vat" style="margin-bottom: 5px;">
+                                                        <strong>Nit:</strong>
+                                                        <span t-field="o.partner_id.vat"/>
+                                                    </p>
+                                                    <p t-if="o.partner_id.phone" style="margin-bottom: 5px;">
+                                                        <strong>Teléfono:</strong>
+                                                        <span t-field="o.partner_id.phone"/>
+                                                    </p>
+                                                    <p t-if="o.partner_id.email" style="margin-bottom: 5px;">
+                                                        <strong>Correo:</strong>
+                                                        <span t-field="o.partner_id.email"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-5 float-right">
+                                                <p t-if="o.asesor_partner" style="margin-bottom: 5px;">
+                                                    <strong>Asesor:</strong>
+                                                    <span t-field="o.asesor_partner.name"/>
+                                                </p>
+                                                <p t-if="o.asesor_partner" style="margin-bottom: 5px;">
+                                                    <t t-if="o.asesor_partner.telefono">
+                                                        <strong>Teléfono:</strong>
+                                                        <span t-field="o.asesor_partner.telefono"/>
+                                                    </t>
+                                                </p>
+                                                <p t-if="o.asesor_partner" style="margin-bottom: 5px;">
+                                                    <t t-if="o.asesor_partner.email">
+                                                        <strong>Correo:</strong>
+                                                        <span t-field="o.asesor_partner.email"/>
+                                                    </t>
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="row justify-content-center">-->
+                                <br/>
+                                <div class="col-20">
+                                    <h4 class="title_row">Presupuesto #
+                                        <span t-field="o.name"/>
+                                    </h4>
+                                    <div class="text-center">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha de presupuesto:</th>
+                                                    <th>Términos de pago</th>
+                                                    <th>Fecha de caducidad</th>
+                                                    <th>Forma de pago</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="span" t-field="o.date_order"/>
+                                                    </td>
+                                                    <td>
+                                                        <span class="span" t-field="o.payment_term_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <span class="span" t-field="o.validity_date"/>
+                                                    </td>
+                                                    <td>
+                                                        <span class="strong" t-field="o.forma_de_pago"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Productos</h4>
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Codigo</th>
+                                                    <th>Producto</th>
+                                                    <th class="col-description">Descripción</th>
+                                                    <th>Imagen</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio unitario</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="o.order_line" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.product_id.default_code"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.product_id.name"/>
+                                                    </td>
+                                                    <td class="col-description">
+                                                        <span t-field="l.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <img t-attf-src="data:image/*;base64,{{l.product_id.image_1920}}"
+                                                             style="max-width:80px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.product_uom_qty"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.price_unit"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.price_subtotal"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row container" style="padding-top: 5px;">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-6 float-left">
+                                                <strong>Total en letras:</strong>
+                                                <span t-esc="o.num_a_letras(o.amount_total)"/>
+                                            </div>
+                                            <div class="col-6 float-right">
+                                                <table class="table table-sm table-body" style="margin-top: 5px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Subtotal:</td>
+                                                            <td class="text-right">
+                                                                <span t-field="o.amount_untaxed"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Impuestos:</td>
+                                                            <td class="text-right">
+                                                                <span t-field="o.amount_tax"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Total:</td>
+                                                            <td class="text-right">
+                                                                <span t-field="o.amount_total"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Terminos y condiciones</h5>
+                                        <p>
+                                            <span t-field="o.note"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
